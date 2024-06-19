@@ -1,0 +1,24 @@
+<div #root>
+  <table #table>
+    <tr *ngFor="let tr of header">
+      <th>•</th>
+      <th *ngFor="let th of tr">{{th}}</th>
+      <td>actions</td>
+    </tr>
+    <tr *ngFor="let tr of rows">
+      <td>•</td>
+      <td *ngFor="let td of tr">{{td}}</td>
+      <td>actions</td>
+    </tr>
+  </table>
+  <div>
+    <p class="inline">total: {{this.rowsCount}}</p>
+    <span> • </span>
+    <p class="inline">pageSize: {{this.pageSize}}</p>
+    <br/>
+    <button type="button" (click)="this.page = 0" [disabled]="this.page <= 0">first</button>
+    <button type="button" (click)="this.page = this.page - 1" [disabled]="this.page <= 0">prev</button>
+    <button type="button" (click)="this.page = this.page + 1" [disabled]="this.page >= this.pagesCount">next</button>
+    <button type="button" (click)="this.page = this.pagesCount;" [disabled]="this.page >= this.pagesCount">last</button>
+  </div>
+</div>

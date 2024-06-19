@@ -1,0 +1,23 @@
+.flex-container {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.active {
+  font-weight: bold;
+  color: red;
+}
+
+table {
+  max-height: 400px;
+  min-height: 300px;
+  display: inline-block;
+  overflow: auto;
+}
+
+.inline {
+  display: inline;
+}
