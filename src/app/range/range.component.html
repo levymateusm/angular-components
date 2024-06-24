@@ -1,0 +1,24 @@
+<div [formGroup]="this.form">
+  <input
+    type="number"
+    [formControl]="this.form.controls.min"
+    [max]="this.form.controls.max.value"
+    placeholder="min"
+  />
+    <input
+    type="number"
+    [formControl]="this.form.controls.between"
+    [min]="this.form.controls.min.value"
+    [max]="this.form.controls.max.value"
+    placeholder="between"
+  />
+  <input
+    type="number"
+    [formControl]="this.form.controls.max"
+    [min]="this.form.controls.min.value"
+    placeholder="max"
+  />
+  <hr />
+  <h3>form is valid: {{ this.form.valid }}</h3>
+  <h4 [innerHTML]="this.getError()"></h4>
+</div>

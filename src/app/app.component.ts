@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { TableComponent } from './table/table.component';
+import { RangeComponent } from './range/range.component';
+import { DatePickerComponent } from './date-picker/date-picker.component';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [TableComponent],
+  imports: [TableComponent, RangeComponent, DatePickerComponent],
 })
 export class AppComponent {
   isTableOverflow = false;
@@ -38,4 +40,10 @@ export class AppComponent {
     ['wolverine', '32'],
     ['superman', '29'],
   ];
+
+  date = new Date(2023, 10, 1);
+
+  debug(value: unknown) {
+    console.log(value);
+  }
 }

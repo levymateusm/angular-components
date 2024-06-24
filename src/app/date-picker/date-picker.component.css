@@ -1,0 +1,54 @@
+.date-picker-root {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: fit-content;
+}
+
+.date-picker-table {
+  display: flex;
+  flex-direction: column;
+  width: inherit;
+  height: inherit;
+}
+
+.date-picker-row {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.date-picker-cell {
+  width: 42px;
+  height: 42px;
+  text-align: center;
+  display: flex;
+}
+
+.wrap-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.date-picker-btn {
+  border: none;
+  background: transparent;
+  padding: 0px;
+  margin: 0px;
+}
+
+.date-picker-btn:hover {
+  cursor: pointer;
+}
+
+.date-picker-btn--active {
+  color: blue;
+}
+
+.date-picker-btn--disabled {
+  color: #bebebe;
+}

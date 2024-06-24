@@ -1,0 +1,26 @@
+<div class="date-picker-root">
+  <div class="date-picker-row flex-between">
+    <button type="button" (click)="prevMonth()"><</button>
+    {{this.month}} {{this.date.getFullYear()}}
+    <button type="button" (click)="nextMonth()">></button>
+  </div>
+  <div class="date-picker-table">
+    <div class="date-picker-row" >
+      <div class="date-picker-cell wrap-center" *ngFor="let day of daysOfWeek">{{day}}</div>
+    </div>
+    <div class="date-picker-row" *ngFor="let tr of dates">
+      <button
+        type="button"
+        *ngFor="let td of tr"
+        [ngClass]="{
+          'date-picker-cell date-picker-btn wrap-center': true,
+          'date-picker-btn--active': this.isValidActiveDate(this.date, td),
+          'date-picker-btn--disabled': this.date.getMonth() !== td.getMonth(),
+        }"
+        (click)="setCurrentDate(td)"
+      >
+        {{td.getDate()}}
+      </button>
+    </div>
+  </div>
+</div>
