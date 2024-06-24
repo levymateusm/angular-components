@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { TableComponent } from './table/table.component';
 import { RangeComponent } from './range/range.component';
 import { DatePickerComponent } from './date-picker/date-picker.component';
+import { RangeDatePickerComponent } from './range-date-picker/range-date-picker.component';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [TableComponent, RangeComponent, DatePickerComponent],
+  imports: [TableComponent, RangeComponent, DatePickerComponent, RangeDatePickerComponent],
 })
 export class AppComponent {
   isTableOverflow = false;

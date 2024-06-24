@@ -1,5 +1,5 @@
 import { NgClass, NgFor } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-date-picker',
@@ -8,7 +8,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './date-picker.component.html',
   styleUrl: './date-picker.component.css',
 })
-export class DatePickerComponent {
+export class DatePickerComponent implements OnChanges {
   protected months = [
     'January',
     'February',
@@ -24,9 +24,13 @@ export class DatePickerComponent {
     'December',
   ];
 
-  @Input() date = new Date();
+  @Input() date: Date = new Date();
 
-  @Output() selectDate = new EventEmitter();
+  @Input() minDate: Date | null = null;
+
+  @Input() disabled = false;
+
+  @Output() selectDate = new EventEmitter<Date>();
 
   constructor() {
     this.date.setHours(0);
@@ -42,7 +46,9 @@ export class DatePickerComponent {
     const daysOfWeek = Array.from({ length: 7 }, (_, i) => {
       const date = new Date();
       date.setDate(date.getDate() - date.getDay() + i);
-      return date.toLocaleDateString(window.navigator.language, { weekday: 'narrow' });
+      return date.toLocaleDateString(window.navigator.language, {
+        weekday: 'narrow',
+      });
     });
     return daysOfWeek;
   }
@@ -58,10 +64,7 @@ export class DatePickerComponent {
 
     // primeiro dia do mes
     const pivotDate = new Date(
-      this.date.getFullYear(),
-      this.date.getMonth(),
-      1,
-      0,
+      this.date.getFullYear(), this.date.getMonth(), 1, 0, 0, 0
     );
 
     // ultimo dia do mes anterior
@@ -105,8 +108,31 @@ export class DatePickerComponent {
 
   protected isValidActiveDate(dateA: Date, dateB: Date) {
     return (
+      !this.isDisabled(dateA) &&
+      !this.isDisabled(dateB) &&
       dateA.getDate() === dateB.getDate() &&
       dateA.getMonth() === dateB.getMonth()
     );
+  }
+
+  protected isDisabled(date: Date) {
+    if (this.minDate) {
+      return date.getTime() < this.minDate.getTime();
+    }
+    return false;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['minDate'] && changes['minDate'].currentValue?.getTime() >= this.date.getTime()) {
+      const date = new Date(changes['minDate'].currentValue)
+
+      date.setHours(0)
+      date.setMinutes(0)
+      date.setSeconds(0)
+
+      this.date = date;
+      
+      this.selectDate.emit(date)
+    }
   }
 }

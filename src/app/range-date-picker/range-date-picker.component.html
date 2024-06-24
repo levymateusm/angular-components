@@ -1,0 +1,4 @@
+<div class="range-date-picker-root">
+  <app-date-picker [date]="startDate" (selectDate)="onSelectStartDate($event)" />
+  <app-date-picker [date]="endDate" (selectDate)="onSelectEndDate($event)" [minDate]="minEndDate" />
+</div>

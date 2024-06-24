@@ -17,6 +17,7 @@
           'date-picker-btn--active': this.isValidActiveDate(this.date, td),
           'date-picker-btn--disabled': this.date.getMonth() !== td.getMonth(),
         }"
+        [disabled]="this.isDisabled(td)"
         (click)="setCurrentDate(td)"
       >
         {{td.getDate()}}
